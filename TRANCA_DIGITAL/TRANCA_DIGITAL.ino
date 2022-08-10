@@ -148,9 +148,13 @@ void loop() {
               i = 0;
               lcd.clear(); // LIMPA O DISPLAY
               lcd.print("INFO:");
-              delay(1000); // DELAY DE 5 SEGUNDOS
+              delay(3000); // DELAY DE 5 SEGUNDOS
               lcd.setCursor(0, 1); // POSICIONA O CURSOR NA PRIMEIRA COLUNA DA LINHA 2
-              lcd.print("UniFacemp TRAC-01");
+              lcd.print("UniFacemp TRA-01");
+              lcd.clear(); // LIMPA O DISPLAY
+              lcd.print("Senha: ");
+              lcd.setCursor(0, 1); // POSICIONA O CURSOR NA PRIMEIRA COLUNA DA LINHA 2
+              lcd.print(digitado);
               
               break;
       case '0':
