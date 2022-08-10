@@ -61,7 +61,8 @@ void setup() {
   
   lcd.print("Senha :");
   lcd.setCursor(0, 1); // POSICIONA O CURSOR NA PRIMEIRA COLUNA DA LINHA 2
-
+  
+  digitalWrite(ledPin, HIGH);
 
  
 }
@@ -80,7 +81,7 @@ void loop() {
               if(digitado == SENHA){
                 digitado = "";
                 i = 0;
-                digitalWrite(ledPin, HIGH); // sets the digital pin 13 on
+                digitalWrite(ledPin, LOW); // sets the digital pin 13 on
                 lcd.clear(); // LIMPA O DISPLAY
                 lcd.print("Liberado!");
                 delay(5000); // DELAY DE 5 SEGUNDOS
@@ -88,7 +89,7 @@ void loop() {
                 lcd.clear(); // LIMPA O DISPLAY
                 lcd.print("Senha :");
                 lcd.setCursor(0, 1); // POSICIONA O CURSOR NA PRIMEIRA COLUNA DA LINHA 2
-                digitalWrite(ledPin, LOW);  // sets the digital pin 13 off
+                digitalWrite(ledPin, HIGH);  // sets the digital pin 13 off
               }else{
                 digitado = "";
                 i = 0;
