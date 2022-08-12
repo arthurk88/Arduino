@@ -37,7 +37,7 @@ byte PINOS_COLUNA[COLUNAS] = {30,32,34,36}; //pinos que indicam as colunas do te
 Keypad customKeypad = Keypad( makeKeymap(SIMBOLOS), PINOS_LINHA, PINOS_COLUNA, LINHAS, COLUNAS);
 
 
-const String SENHA = "123456";
+const String SENHA = "7616";
 String digitado = "";
 int i = 0;
 
@@ -220,22 +220,69 @@ void loop() {
                 //configura a mensagem para digitar a senha
                 break;
         case 'D':
-              digitalWrite(BUZ, HIGH); // ativa o SOM
-              analogWrite (LEDBLUE, 255);
-              delay(500);            // espera por um segundo
-              digitalWrite(BUZ, LOW); // Desativa o SOM
-              analogWrite (LEDBLUE, 0);
+
+                digitalWrite(BUZ, HIGH); // ativa o SOM
+                analogWrite (LEDBLUE, 255);
+                delay(500);            // espera por um segundo
+                digitalWrite(BUZ, LOW); // Desativa o SOM
+                analogWrite (LEDBLUE, 0);
                 digitado = "";
                 i = 0;
                 lcd.clear(); // LIMPA O DISPLAY
                 lcd.print("INFO:");
-                delay(3000); // DELAY DE 5 SEGUNDOS
                 lcd.setCursor(0, 1); // POSICIONA O CURSOR NA PRIMEIRA COLUNA DA LINHA 2
                 lcd.print("UniFacemp TRA-01");
+                delay(5000);
                 lcd.clear(); // LIMPA O DISPLAY
                 lcd.print("Senha: ");
                 lcd.setCursor(0, 1); // POSICIONA O CURSOR NA PRIMEIRA COLUNA DA LINHA 2
                 lcd.print(digitado);
+              
+               /* if(digitado == 99999){
+                  digitado = "";
+                  i = 0;
+
+                  while(digitalRead(teclado == 'D') != LOW);{  
+
+                  digitado+=teclado;
+                  Serial.println("Digitado: "+digitado+" I: "+i);
+                  //imrpime na tela o símbolo pressionado
+                  
+                  digitalWrite(BUZ, HIGH); // ativa o SOM
+                  analogWrite (LEDRED, 255);
+                  lcd.print("CODE :");
+                  lcd.setCursor(0, 1); // POSICIONA O CURSOR NA PRIMEIRA COLUNA DA LINHA 2
+                  lcd.print(digitado);
+                  delay(100);            // espera por um segundo
+                  digitalWrite(BUZ, LOW); // Desativa o SOM
+                  analogWrite (LEDRED, 0);
+                  
+                  
+      
+                  i += 1;
+                        
+                  }
+             
+                
+                }else{
+                digitalWrite(BUZ, HIGH); // ativa o SOM
+                analogWrite (LEDBLUE, 255);
+                delay(500);            // espera por um segundo
+                digitalWrite(BUZ, LOW); // Desativa o SOM
+                analogWrite (LEDBLUE, 0);
+                digitado = "";
+                i = 0;
+                lcd.clear(); // LIMPA O DISPLAY
+                lcd.print("INFO:");
+                lcd.setCursor(0, 1); // POSICIONA O CURSOR NA PRIMEIRA COLUNA DA LINHA 2
+                lcd.print("UniFacemp TRA-01");
+                delay(5000);
+                lcd.clear(); // LIMPA O DISPLAY
+                lcd.print("Senha: ");
+                lcd.setCursor(0, 1); // POSICIONA O CURSOR NA PRIMEIRA COLUNA DA LINHA 2
+                lcd.print(digitado);
+                }*/
+      
                 
                 break;
         case '0':
