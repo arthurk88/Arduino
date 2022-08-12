@@ -239,10 +239,10 @@ void loop() {
                 lcd.print(digitado);
               
                /* if(digitado == 99999){
-                  digitado = "";
-                  i = 0;
-
-                  while(digitalRead(teclado == 'D') != LOW);{  
+                 
+                   while(Serial.available() == 0) {
+    
+                  }
 
                   digitado+=teclado;
                   Serial.println("Digitado: "+digitado+" I: "+i);
