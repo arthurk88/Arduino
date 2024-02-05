@@ -1,0 +1,198 @@
+// Include libraries
+#include <LiquidCrystal.h>
+#include <Servo.h>
+
+#define triggerPin 2 // O Trigger emite o pulso
+#define echoPin 3    // O Echo recebe o pulso
+
+LiquidCrystal lcd(6, 7, 8, 9, 10, 11);
+
+float reservatorio = 1.5; 
+// Altura do reservatorio deve ser definida pelo Cliente
+// Assim criaremos uma logica para os intervalos de niveis
+// sinalizando 5 etapas vazio, ... , medio, ... , cheio
+// Quanto mais estapas mais preciso a exibição
+
+int duracao = 0;
+int distancia = 0;
+
+int servoPin = 4;
+int estadoBotao = 0;
+bool buzzerAtivado = false;
+
+float peso = 0.0; // Variável para armazenar o peso em quilos
+
+// Definindo pinos dos botões
+int botaoMaisPin = 13;
+int botaoMenosPin = 12;
+int botaoCancelarPin = 5;
+int botaoConfirmarPin = 1;
+
+int campainhaPin = A5;
+
+void setup()
+{
+	Serial.end();
+    lcd.begin(16, 2);
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Nivel de reserv.");
+    lcd.setCursor(0, 1);
+    lcd.print("Quant. em KG: 0.0");
+
+    // Configurando pinos dos botões como entrada e saida
+    pinMode(botaoMaisPin, INPUT_PULLUP);
+    pinMode(botaoMenosPin, INPUT_PULLUP);
+    pinMode(botaoCancelarPin, INPUT_PULLUP);
+    pinMode(botaoConfirmarPin, INPUT_PULLUP);
+
+    pinMode(triggerPin, OUTPUT);
+    pinMode(echoPin, INPUT);
+    pinMode(campainhaPin, INPUT);
+    delay(1000);
+    nivel();
+}
+
+void loop()
+{
+
+    // Lógica principal aqui
+    estadoBotao = digitalRead(botaoMaisPin);
+    if (estadoBotao == LOW)
+    {
+      
+        ButaoMais();
+        nivel();
+    }
+
+    estadoBotao = digitalRead(botaoMenosPin);
+    if (estadoBotao == LOW)
+    {
+      	
+        ButaoMenos();
+        nivel();
+    }
+
+    estadoBotao = digitalRead(botaoCancelarPin);
+    if (estadoBotao == LOW)
+    {
+      
+        ButaoCancelar();
+        nivel();
+    }
+
+    estadoBotao = digitalRead(botaoConfirmarPin);
+    if (estadoBotao == LOW)
+    {
+      	
+        ButaoConfirma();
+        nivel();
+    }
+
+}
+
+void ButaoMais()
+{
+    peso += 0.5; // Adiciona 500g
+}
+
+void ButaoMenos()
+{
+    if (peso >= 0.5)
+    {
+        peso -= 0.5; // Remove 500g se houver peso suficiente
+    }
+}
+
+void ButaoCancelar()
+{
+    peso = 0.0;
+}
+
+void ButaoConfirma()
+{
+    if (peso >= 0.5)
+    {
+        motor();
+    }
+}
+
+void nivel()
+{
+
+    // Gera um pulso de 10 microssegundos no pino de trigger
+    digitalWrite(triggerPin, LOW);
+    delayMicroseconds(2);
+    digitalWrite(triggerPin, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(triggerPin, LOW);
+
+    // Mede a duração do pulso recebido no pino de echo
+    unsigned long duration = pulseIn(echoPin, HIGH);
+
+    // Calcula a distância em centímetros
+    float distancia = duration * 0.034 / 2;
+
+    // Convertendo a duração do pulso em centímetros
+    lcd.clear();
+    // condições para determinar o nível da água com base na distância medida
+    if (distancia <= 30)
+    {
+		lcd.setCursor(0, 0);
+        lcd.print("[||||||||||||||]");
+        lcd.setCursor(1, 1);
+        lcd.print("Quant. KG:" + String(peso, 1));
+    }
+
+    if (distancia > 30 && distancia <= 60)
+    {
+        lcd.setCursor(0, 0);
+        lcd.print("[|||||||||||   ]");
+        lcd.setCursor(1, 1);
+        lcd.print("Quant. KG:" + String(peso, 1));
+    }
+
+    if (distancia > 60 && distancia <= 90)
+    {
+        lcd.setCursor(0, 0);
+        lcd.print("[|||||||       ]");
+        lcd.setCursor(1, 1);
+        lcd.print("Quant. KG:" + String(peso, 1));
+    }
+    if (distancia > 90 && distancia <= 120)
+    {
+        lcd.setCursor(0, 0);
+        lcd.print("[|||           ]");
+        lcd.setCursor(1, 1);
+        lcd.print("Quant. KG:" + String(peso, 1));
+    }
+    if (distancia > 120 && distancia <= 150)
+    {
+      	bool buzzerAtivado = true;
+        lcd.setCursor(0, 0);
+        lcd.print("[              ]");
+        lcd.setCursor(1, 1);
+        lcd.print("Quant. KG:" + String(peso, 1));
+        buzzer();
+    }
+}
+
+void buzzer()
+{
+  
+  if (!buzzerAtivado)
+    {                             // Verifica se o buzzer não foi ativado anteriormente e se i é maior ou igual a 1
+        for (int j = 0; j < 3; j++) { // Loop para acionar o buzzer três vezes
+      tone(campainhaPin, 1500); // tocar o buzzer
+      delay(200);
+      noTone(campainhaPin);
+      delay(200);
+    }
+        buzzerAtivado = true; // Marca o buzzer como ativado
+    }
+}
+
+void motor()
+{
+    // rotacionar aguardando perça
+}
