@@ -1,3 +1,9 @@
+/*
+Alunos: Ellen, Isamara, David, Letissia, Gustavo, Clayton, Kevin, Elizabeth, Riquelmi, Rodrigo, Wanessa.
+Instrutor: Arthur
+Senac - 2024
+*/
+
 // Include libraries
 #include <LiquidCrystal.h>
 #include <Servo.h>
