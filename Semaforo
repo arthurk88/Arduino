@@ -1,0 +1,86 @@
+int VERMELHO = 8;
+int AMARELO = 9;
+int VERDE = 10;
+
+int PVERDE = 6;
+int PVERMELHO = 7;
+
+int BT = 3;
+
+bool STATUS = false;
+
+void setup() {
+  pinMode(VERDE, OUTPUT);
+  pinMode(AMARELO, OUTPUT);
+  pinMode(VERMELHO, OUTPUT);
+
+  pinMode(PVERDE, OUTPUT);
+  pinMode(PVERMELHO, OUTPUT);
+
+  pinMode(BT, INPUT_PULLUP);
+
+  Serial.begin(9600);
+}
+
+void loop() {
+  Serial.println(digitalRead(3));
+
+  if (digitalRead(BT) == LOW) {
+    STATUS = true;
+    delay(200);
+  }
+
+  digitalWrite(VERDE, HIGH);
+  digitalWrite(AMARELO, LOW);
+  digitalWrite(VERMELHO, LOW);
+
+  digitalWrite(PVERDE, LOW);
+  digitalWrite(PVERMELHO, HIGH);
+
+  for (int i = 0; i < 40; i++) {
+    if (digitalRead(BT) == LOW) {
+      STATUS = true;
+    }
+    delay(100);
+  }
+
+  digitalWrite(VERDE, LOW);
+  digitalWrite(AMARELO, HIGH);
+  delay(2000);
+
+  digitalWrite(AMARELO, LOW);
+  digitalWrite(VERMELHO, HIGH);
+
+  if (STATUS == true) {
+    digitalWrite(PVERMELHO, LOW);
+    digitalWrite(PVERDE, HIGH);
+
+    for (int i = 0; i < 20; i++) {
+      if (digitalRead(BT) == LOW) {
+        STATUS = true;
+      }
+      delay(100);
+    }
+
+	for (int i = 0; i < 20; i++) {
+    	
+      if( i%2 == 0){
+        digitalWrite(PVERDE, HIGH);
+      }else{
+        digitalWrite(PVERDE, LOW);
+      }
+         
+         
+      delay(100);
+    }
+
+    digitalWrite(PVERDE, LOW);
+    digitalWrite(PVERMELHO, HIGH);
+
+    STATUS = false;
+  } else {
+    delay(4000);
+  }
+
+  digitalWrite(VERMELHO, LOW);
+}
