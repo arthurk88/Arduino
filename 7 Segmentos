@@ -1,0 +1,156 @@
+
+  int LedA = 6;
+  int LedB = 7;
+  int LedC = 9;
+  int LedD = 10;
+  int LedE = 11;
+  int LedF = 12;
+  int LedG = 13;
+
+
+void setup(){
+  
+  pinMode(LedG,OUTPUT);
+  pinMode(LedF,OUTPUT);
+  pinMode(LedE,OUTPUT);
+  pinMode(LedD,OUTPUT);
+  pinMode(LedC,OUTPUT);
+  pinMode(LedB,OUTPUT);
+  pinMode(LedA,OUTPUT);
+  
+}
+
+void loop(){
+  
+  // 9
+  
+  	digitalWrite(LedA, HIGH);
+    digitalWrite(LedB, HIGH);
+    digitalWrite(LedC, HIGH);
+    digitalWrite(LedD, LOW);
+    digitalWrite(LedE, LOW);
+    digitalWrite(LedF, HIGH);
+    digitalWrite(LedG, HIGH);
+ 
+    delay(1000);
+  
+    // 8
+  
+  	digitalWrite(LedA, HIGH);
+    digitalWrite(LedB, HIGH);
+    digitalWrite(LedC, HIGH);
+    digitalWrite(LedD, HIGH);
+    digitalWrite(LedE, HIGH);
+    digitalWrite(LedF, HIGH);
+    digitalWrite(LedG, HIGH);
+ 
+    delay(1000);
+  
+   // 7
+  
+  	digitalWrite(LedA, HIGH);
+    digitalWrite(LedB, HIGH);
+    digitalWrite(LedC, HIGH);
+    digitalWrite(LedD, LOW);
+    digitalWrite(LedE, LOW);
+    digitalWrite(LedF, LOW);
+    digitalWrite(LedG, LOW);
+ 
+    delay(1000);
+  
+   // 6
+  
+  	digitalWrite(LedA, LOW);
+    digitalWrite(LedB, LOW);
+    digitalWrite(LedC, HIGH);
+    digitalWrite(LedD, HIGH);
+    digitalWrite(LedE, HIGH);
+    digitalWrite(LedF, HIGH);
+    digitalWrite(LedG, HIGH);
+ 
+    delay(1000);
+  
+  // 5
+  
+  	digitalWrite(LedA, HIGH);
+    digitalWrite(LedB, LOW);
+    digitalWrite(LedC, HIGH);
+    digitalWrite(LedD, HIGH);
+    digitalWrite(LedE, LOW);
+    digitalWrite(LedF, HIGH);
+    digitalWrite(LedG, HIGH);
+ 
+    delay(1000);
+  
+   // 4
+  
+  	digitalWrite(LedA, LOW);
+    digitalWrite(LedB, HIGH);
+    digitalWrite(LedC, HIGH);
+    digitalWrite(LedD, LOW);
+    digitalWrite(LedE, LOW);
+    digitalWrite(LedF, HIGH);
+    digitalWrite(LedG, HIGH);
+ 
+    delay(1000);
+  
+    // 3
+  
+  	digitalWrite(LedA, HIGH);
+    digitalWrite(LedB, HIGH);
+    digitalWrite(LedC, HIGH);
+    digitalWrite(LedD, HIGH);
+    digitalWrite(LedE, LOW);
+    digitalWrite(LedF, LOW);
+    digitalWrite(LedG, HIGH);
+ 
+    delay(1000);
+  
+   // 2
+  
+  	digitalWrite(LedA, HIGH);
+    digitalWrite(LedB, HIGH);
+    digitalWrite(LedC, LOW);
+    digitalWrite(LedD, HIGH);
+    digitalWrite(LedE, HIGH);
+    digitalWrite(LedF, LOW);
+    digitalWrite(LedG, HIGH);
+ 
+    delay(1000);
+  
+  // 1
+  
+  	digitalWrite(LedA, LOW);
+    digitalWrite(LedB, HIGH);
+    digitalWrite(LedC, HIGH);
+    digitalWrite(LedD, LOW);
+    digitalWrite(LedE, LOW);
+    digitalWrite(LedF, LOW);
+    digitalWrite(LedG, LOW);
+ 
+    delay(1000);
+  
+  // 0
+  
+  	digitalWrite(LedA, HIGH);
+    digitalWrite(LedB, HIGH);
+    digitalWrite(LedC, HIGH);
+    digitalWrite(LedD, HIGH);
+    digitalWrite(LedE, HIGH);
+    digitalWrite(LedF, HIGH);
+    digitalWrite(LedG, LOW);
+ 
+    delay(1000);
+  
+   // null
+  
+  	digitalWrite(LedA, LOW);
+    digitalWrite(LedB, LOW);
+    digitalWrite(LedC, LOW);
+    digitalWrite(LedD, LOW);
+    digitalWrite(LedE, LOW);
+    digitalWrite(LedF, LOW);
+    digitalWrite(LedG, LOW);
+ 
+    delay(1000);
+}
