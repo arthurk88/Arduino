@@ -1,0 +1,61 @@
+int trig = 4;
+int echo = 5;
+int buze = 3;
+
+long duracao;
+float distancia;
+
+void setup()
+{
+  pinMode(trig, OUTPUT);
+  pinMode(echo, INPUT);
+  pinMode(buze, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  // Envia pulso ultrassônico
+  digitalWrite(trig, LOW);
+  delayMicroseconds(2);
+
+  digitalWrite(trig, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trig, LOW);
+
+  // Lê o tempo do eco
+  duracao = pulseIn(echo, HIGH);
+
+  // Calcula a distância
+  distancia = duracao * 0.034 / 2;
+
+  // Controle do buzzer por faixa de distância
+  if (distancia <= 30) {
+    tone(buze, 2000);
+    delay(100);
+    noTone(buze);
+    delay(100);   // pausa curta (bip rápido)
+  } 
+  else if (distancia <= 100) {
+    tone(buze, 1500);
+    delay(100);
+    noTone(buze);
+    delay(300);   // pausa média
+  } 
+  else if (distancia <= 150) {
+    tone(buze, 1000);
+    delay(100);
+    noTone(buze);
+    delay(600);   // pausa longa
+  } 
+  else {
+    noTone(buze);
+    delay(500);
+  }
+
+  Serial.print("Distancia: ");
+  Serial.print(distancia);
+  Serial.println(" cm");
+
+  
+}
