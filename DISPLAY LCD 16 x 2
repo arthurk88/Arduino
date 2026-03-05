@@ -1,0 +1,22 @@
+#include <LiquidCrystal.h>
+// RS, E, D4, D5, D6, D7
+LiquidCrystal lcd(7, 6, 5, 4, 3, 2);
+void setup() 
+{
+  lcd.begin(16, 2);
+  lcd.clear();
+}
+void loop() {
+  // Limpa o display antes de atualizar
+  lcd.clear();
+  // Primeira linha
+  lcd.setCursor(3, 0);
+  lcd.print("Ola mundo");
+  // Segunda linha - tempo em segundos
+  lcd.setCursor(3, 1);
+  lcd.print("Tempo: ");
+  lcd.print(millis() / 1000);
+  // Faz o texto andar para a esquerda
+  //lcd.scrollDisplayLeft();
+  delay(300); // controla a velocidade do scroll
+}
