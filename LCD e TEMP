@@ -1,0 +1,49 @@
+#include <LiquidCrystal.h>
+// Define o pino onde o sensor de temperatura está conectado
+int tempPin = A0;
+
+// RS, E, D4, D5, D6, D7
+LiquidCrystal lcd(7, 6, 5, 4, 3, 2);
+
+void setup() {
+  Serial.begin(9600);
+  lcd.begin(16, 2);
+  lcd.clear();
+}
+
+void loop() {
+lcd.clear();
+  // Lê o valor analógico do sensor de temperatura (0 a 1023)
+  int raw = analogRead(tempPin);
+
+  // Converte o valor lido para temperatura em Celsius
+  // raw * 5.0 / 1023.0 → converte para Volts (0 a 5V)
+  // -0.5 → remove offset do sensor (500mV)
+  // *100 → converte para graus Celsius (LM35/TMP36)
+  float tempC = ((raw * 5 / 1023.0) - 0.5) * 100.0;
+
+  // Converte Celsius para Fahrenheit
+  float tempF = tempC * 1.8 + 32;
+
+  Serial.println();
+  // Mostra a temperatura em Celsius no Monitor Serial
+  Serial.println("Temp : ");
+  Serial.print(tempC);
+  Serial.println(" | C");
+
+  // Mostra a temperatura em Fahrenheit
+  Serial.print(tempF);
+  Serial.print(" | F");
+  
+  // Segunda linha - tempo em segundos
+  lcd.setCursor(1, 0);
+  lcd.print("Temp: ");
+  lcd.setCursor(1, 1);
+  lcd.print(tempC);
+  lcd.print(" | ");
+  lcd.print(tempF);
+
+
+  delay(1000); // controla a velocidade do scroll
+
+}
